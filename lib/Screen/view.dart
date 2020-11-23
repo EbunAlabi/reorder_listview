@@ -40,8 +40,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('Add Products'),
-        ),
+            leading: IconButton(
+                icon: Icon(
+              Icons.arrow_back_ios,
+              color: primaryAccent,
+            )),
+            backgroundColor: Colors.white,
+            title: Text(
+              'Add Products',
+              style: TextStyle(color: primaryAccent),
+            )),
         body: Container(
           // decoration: new BoxDecoration(
           //   // image: new DecorationImage(
@@ -81,8 +89,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             userInput = textTyped;
                           },
                           controller: inputString,
-                          cursorColor: darkGrey,
-                          cursorHeight: 20,
+                          //cursorColor: darkGrey,
+                          //cursorHeight: 20,
+                          showCursor: false,
                           decoration: (InputDecoration(
                             hintStyle: TextStyle(
                               fontSize: 24,
@@ -101,26 +110,25 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       ),
                       SizedBox(
                         width: 1,
-                        height: 55,
+                        height: 60,
                         child: Container(
                           color: darkGrey,
                         ),
                       ),
-                      Center(
-                        child: SizedBox(
-                          height: 50,
-                          width: 50,
-                          child: Expanded(
-                            child: IconButton(
-                                icon: Icon(Icons.add),
-                                onPressed: () {
-                                  print(inputString.text);
-                                  print(widget.item);
-                                  widget.item.add(inputString.text);
-                                  print(widget.item);
-                                }),
-                          ),
-                        ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(7, 0, 0, 12),
+                        child: IconButton(
+                            color: primaryAccent,
+                            icon: Icon(
+                              Icons.add,
+                              size: 50,
+                            ),
+                            onPressed: () {
+                              print(inputString.text);
+                              print(widget.item);
+                              widget.item.add(inputString.text);
+                              print(widget.item);
+                            }),
                       )
                     ],
                   ),
@@ -142,10 +150,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             elevation: 2,
                             child: Container(
                               child: ListTile(
-                                
                                 title: Text(items),
-                                leading:
-                                    Icon(Icons.drag_indicator, color: lightGrey),
+                                leading: Icon(Icons.drag_indicator,
+                                    color: lightGrey),
                                 trailing: InkWell(
                                   onTap: () {
                                     int x = widget.item.indexOf(items);
