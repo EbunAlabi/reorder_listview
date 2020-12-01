@@ -30,8 +30,36 @@ class _CategoryScreenState extends State<CategoryScreen> {
     });
   }
 
+  void onDrag(x) {
+    String y = widget.item[x];
+    String g = y;
+    List f = [];
+    f = g.split(' ');
+    if (f.length == 1) {
+      String v = f[0];
+      f[0] = x.toString() + '.1';
+      f.add(v);
+    } else {
+      String w = f[0];
+      f[0] = w.toString() + '.1';
+    }
+    print('new print out ${f}');
+    print('2nd new print out ${f[0]}');
+    setState(() {
+      widget.item[x] = '${f[0]} ${f[1]}';
+    });
+  }
+
+  void onDragStart(x) {
+    String y = widget.item[x];
+    List f = [];
+    f = y.split(' ');
+    print('I have been dragged to the start');
+  }
+
   @override
   Widget build(BuildContext context) {
+    int w = 0;
     String userInput;
     TextEditingController inputString = new TextEditingController();
     double width = MediaQuery.of(context).size.width;
@@ -41,10 +69,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
         backgroundColor: Colors.white,
         appBar: AppBar(
             leading: IconButton(
-                icon: Icon(
-              Icons.arrow_back_ios,
-              color: primaryAccent,
-            )),
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: primaryAccent,
+              ),
+            ),
             backgroundColor: Colors.white,
             title: Text(
               'Add Products',
@@ -149,19 +178,30 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             key: ValueKey(items),
                             elevation: 2,
                             child: Container(
-                              child: ListTile(
-                                title: Text(items),
-                                leading: Icon(Icons.drag_indicator,
-                                    color: lightGrey),
-                                trailing: InkWell(
-                                  onTap: () {
-                                    int x = widget.item.indexOf(items);
-                                    print(x);
-                                    _showDialog(items, x);
-                                  },
-                                  child: Icon(
-                                    Icons.edit,
-                                    color: lightGrey,
+                              child: GestureDetector(
+                                onHorizontalDragStart:
+                                    (DragStartDetails details) {
+                                  int x = widget.item.indexOf(items);
+                                  onDragStart(x);
+                                },
+                                onHorizontalDragEnd: (DragEndDetails details) {
+                                  int x = widget.item.indexOf(items);
+                                  onDrag(x);
+                                },
+                                child: ListTile(
+                                  title: Text(items),
+                                  leading: Icon(Icons.drag_indicator,
+                                      color: lightGrey),
+                                  trailing: InkWell(
+                                    onTap: () {
+                                      int x = widget.item.indexOf(items);
+                                      print(x);
+                                      _showDialog(items, x);
+                                    },
+                                    child: Icon(
+                                      Icons.edit,
+                                      color: lightGrey,
+                                    ),
                                   ),
                                 ),
                               ),

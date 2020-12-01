@@ -50,6 +50,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.3"
+  drag_and_drop_lists:
+    dependency: "direct dev"
+    description:
+      name: drag_and_drop_lists
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.9+2"
   fake_async:
     dependency: transitive
     description:
